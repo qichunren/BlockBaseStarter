@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a starter kit for Rails 8 + Vite + React + TailwindCSS.
 
-Things you may want to cover:
+## Environment
 
-* Ruby version
+- Ruby 3.3.4
+- Rails 8.0 edge
+- Node.js 20.x
 
-* System dependencies
+## Development
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+bin/setup
+bin/rails server
+bin/vite dev
+```
