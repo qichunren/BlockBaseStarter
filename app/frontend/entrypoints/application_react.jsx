@@ -4,7 +4,7 @@ import '../css/index.css';
 import App from '../components/app'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.body.appendChild(document.createElement('div'));
+  const container = document.getElementById('root');
   const root = createRoot(container);
   root.render(<App />);
 })
