@@ -26,6 +26,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y npm
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -36,7 +39,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bin/importmap audit
+        run: npm audit
 
   lint:
     runs-on: ubuntu-latest
