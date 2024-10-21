@@ -4,7 +4,7 @@ export default {
     "./app/views/**/*.html.erb",
     "./app/helpers/**/*.rb",
     "./app/assets/stylesheets/**/*.css",
-    "./app/frontend/**/*.{js,jsx,css}",
+    "./app/frontend/**/*.{js,jsx,css,ts,tsx}",
   ],
   theme: {
     extend: {},
