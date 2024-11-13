@@ -1,6 +1,8 @@
 # README
 
-This project is a starter kit for Rails 8 + Vite + React + TailwindCSS.
+This project is a starter kit for Rails 8 + Vite + React + TailwindCSS + shadcn/ui.
+
+In this project, you can design pages using the conventional Rails approach with friendly SSR (server-side rendering), or you can build complex user interfaces using React, driven by react-router-dom for client-side routing.
 
 ## Environment
 
