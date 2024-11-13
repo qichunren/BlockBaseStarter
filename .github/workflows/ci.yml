@@ -79,7 +79,7 @@ jobs:
           bundler-cache: true
 
       - name: Install JavaScript dependencies
-        run: npm ci
+        run: npm ci && npm run build
 
       - name: Run tests
         env:

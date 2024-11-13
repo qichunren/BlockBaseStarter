@@ -1,6 +1,6 @@
 # README
 
-This project is a starter kit for Rails 8 + Vite(via vite-rails) + React + TailwindCSS + shadcn/ui.
+This project is a starter kit for Rails 8 + Vite + React + TailwindCSS + shadcn/ui.
 
 In this project, you can design pages using the conventional Rails approach with friendly SSR (server-side rendering), or you can build complex user interfaces using React, driven by react-router-dom for client-side routing.
 
@@ -14,8 +14,8 @@ In this project, you can design pages using the conventional Rails approach with
 
 ```
 bin/setup
+npm run build
 bin/rails server
-bin/vite dev
 ```
 
 ## Changelog
@@ -23,7 +23,7 @@ bin/vite dev
 - 2024-11-14: v1.0.0
   - Initial release, with Rails 8.0, vite-rails, React, TailwindCSS, and shadcn/ui.
 
-- 2024-11-15: v2.x
+- 2024-11-15: v2.x (main branch)
   - Removed vite-rails
   - Change app/frontend to a single Vite project
   - Rails app is now a main API server
