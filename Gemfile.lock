@@ -210,6 +210,11 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
+    propshaft (1.1.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     psych (5.2.0)
       stringio
     public_suffix (6.0.1)
@@ -357,6 +362,7 @@ DEPENDENCIES
   debug
   jbuilder
   kamal
+  propshaft
   puma (>= 5.0)
   rails!
   rubocop-rails-omakase

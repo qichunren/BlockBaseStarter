@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import '../css/index.css';
 import App from '../components/app'
 
 document.addEventListener('DOMContentLoaded', () => {
