@@ -38,6 +38,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Install JavaScript dependencies
+        run: npm install -g pnpm
+
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: pnpm audit
 
