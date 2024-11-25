@@ -40,8 +40,8 @@ RUN bundle install && \
     bundle exec bootsnap precompile --gemfile
 
 # Install node modules
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.json ./
+RUN pnpm install
 
 # Copy application code
 COPY . .
