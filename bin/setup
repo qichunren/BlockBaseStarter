@@ -26,16 +26,16 @@ FileUtils.chdir APP_ROOT do
     puts "   Updating Ruby gems via 'bundle update'"
     system! "bundle update"
 
-    puts "\n   Updating npm packages via 'npm update'"
-    system! "npm update"
+    puts "\n   Updating npm packages via 'pnpm update'"
+    system! "pnpm update"
     exit
   end
 
   puts "== Installing dependencies =="
   system("bundle check") || system!("bundle install")
 
-  puts "== Installing npm dependencies =="
-  system("npm install") || system!("npm install")
+  puts "== Installing pnpm dependencies =="
+  system("pnpm install") || system!("pnpm install")
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

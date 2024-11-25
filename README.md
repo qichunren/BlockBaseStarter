@@ -14,7 +14,7 @@ In this project, you can design pages using the conventional Rails approach with
 
 ```
 bin/setup
-npm run build
+pnpm run build
 bin/rails server
 ```
 
