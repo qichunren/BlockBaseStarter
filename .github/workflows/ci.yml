@@ -39,7 +39,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: npm audit
+        run: pnpm audit
 
   lint:
     runs-on: ubuntu-latest
