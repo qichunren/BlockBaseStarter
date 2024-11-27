@@ -14,7 +14,8 @@ In this project, you can design pages using the conventional Rails approach with
 
 ```
 bin/setup
-pnpm run build
+bin/setup --update   # Optional: Update dependencies
+pnpm run build         # Build the frontend into app/assets/builds
 bin/rails server
 ```
 
