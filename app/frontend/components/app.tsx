@@ -10,6 +10,7 @@ import UsersPage from '../pages/users';
 import { AuthProvider } from '@/contexts/auth-context';
 import { useAuth } from '@/hooks/use-auth';
 import PrivateRoute from '@/components/private-route';
+import Page from '@/pages/page';
 
 const AppContent = () => {
   const { t, i18n } = useTranslation();
@@ -62,6 +63,7 @@ const AppContent = () => {
           </ul>
         </header>
         <Routes>
+          <Route path='/app' element={<Page />} />
           <Route path='/app/pages1' element={<Pages1 />} />
           <Route path='/app/pages2' element={<Pages2 />} />
           <Route path='/app/login' element={<Login />} />
