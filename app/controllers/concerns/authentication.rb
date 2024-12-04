@@ -15,8 +15,11 @@ module Authentication
 
     begin
       decoded = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
+      puts "decoded: #{decoded.inspect}"
       @current_user = User.find(decoded["user_id"])
+      puts "current_user: #{@current_user.inspect}"
     rescue JWT::DecodeError, ActiveRecord::RecordNotFound
+      puts "JWT::DecodeError, ActiveRecord::RecordNotFound"
       render json: { message: t(".unauthorized") }, status: :unauthorized
     end
   end

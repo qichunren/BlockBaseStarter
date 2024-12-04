@@ -12,11 +12,36 @@ In this project, you can design pages using the conventional Rails approach with
 
 ## Development
 
+### Prepare credentials
+
+Use `EDITOR="code --wait"` to open/generate the credentials file **config/credentials.yml.enc** in VSCode.
+
+
+credentials sample:
+
+```
+SECRET_KEY_BASE: 64 bytes hex string
+```
+
+### Setup
+
 ```
 bin/setup
 bin/setup --update   # Optional: Update dependencies
-pnpm run build         # Build the frontend into app/assets/builds
+pnpm run build       # Build the frontend into app/assets/builds
 bin/rails server
+```
+
+### Run tests
+
+```
+bin/rails test
+```
+
+### Check code quality
+
+```
+bin/rubocop -f github
 ```
 
 ## Changelog

@@ -1,0 +1,27 @@
+en:
+  api:
+    v1:
+      users:
+        title: "Users"
+        email: "Email"
+        created_at: "Created At"
+        fetch_error: "Failed to fetch users"
+  pagination:
+    showing: "Showing %{from} to %{to} of %{total} entries"
+    page: "Page %{current} of %{total}"
+    previous: "Previous"
+    next: "Next"
+
+zh:
+  api:
+    v1:
+      users:
+        title: "用户列表"
+        email: "邮箱"
+        created_at: "创建时间"
+        fetch_error: "获取用户列表失败"
+  pagination:
+    showing: "显示第 %{from} 到 %{to} 条，共 %{total} 条"
+    page: "第 %{current} 页，共 %{total} 页"
+    previous: "上一页"
+    next: "下一页" 

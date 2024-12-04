@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :api do
+    namespace :v1 do
+      resources :users, only: [ :index ]
+    end
+
     post "register", to: "auth#register"
     post "login", to: "auth#login"
   end

@@ -6,9 +6,14 @@ import Login from '../pages/auth/login';
 import Register from '../pages/auth/register';
 import { useTranslation } from 'react-i18next';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import UsersPage from '../pages/users';
+import { AuthProvider } from '@/contexts/auth-context';
+import { useAuth } from '@/hooks/use-auth';
+import PrivateRoute from '@/components/private-route';
 
-const App = () => {
+const AppContent = () => {
   const { t, i18n } = useTranslation();
+  const { isAuthenticated, logout } = useAuth();
 
   const handleLanguageChange = (value: string) => {
     i18n.changeLanguage(value);
@@ -24,8 +29,24 @@ const App = () => {
             <li><a href='/posts'>{t('nav.posts')}</a></li>
             <li><Link to='/app/pages1'>Pages1</Link></li>
             <li><Link to='/app/pages2'>Pages2</Link></li>
-            <li><Link to='/app/login'>{t('nav.login')}</Link></li>
-            <li><Link to='/app/register'>{t('nav.register')}</Link></li>
+            {!isAuthenticated ? (
+              <>
+                <li><Link to='/app/login'>{t('nav.login')}</Link></li>
+                <li><Link to='/app/register'>{t('nav.register')}</Link></li>
+              </>
+            ) : (
+              <>
+                <li><Link to='/app/users'>{t('nav.users')}</Link></li>
+                <li>
+                  <button 
+                    onClick={logout}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    {t('nav.logout')}
+                  </button>
+                </li>
+              </>
+            )}
             <li>
               <Select value={i18n.language} onValueChange={handleLanguageChange}>
                 <SelectTrigger>
@@ -45,11 +66,26 @@ const App = () => {
           <Route path='/app/pages2' element={<Pages2 />} />
           <Route path='/app/login' element={<Login />} />
           <Route path='/app/register' element={<Register />} />
-          
+          <Route 
+            path='/app/users' 
+            element={
+              <PrivateRoute>
+                <UsersPage />
+              </PrivateRoute>
+            } 
+          />
         </Routes>
       </div>
     </Router>
   );
-}
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+};
 
 export default App;

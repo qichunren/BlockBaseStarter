@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { useTranslation } from 'react-i18next';
 import { fetchApi } from '@/utils/api';
+import { useAuth } from '@/hooks/use-auth';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -11,6 +12,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,8 +23,10 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
       
-      localStorage.setItem('token', data.token);
-      navigate('/');
+      login(data.token);
+      
+      const from = (location.state as any)?.from?.pathname || '/';
+      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
       setError(err instanceof Error ? err.message : t('auth.login.failed'));
