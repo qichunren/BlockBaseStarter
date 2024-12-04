@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
+import { useTranslation } from 'react-i18next';
+import { fetchApi } from '@/utils/api';
 
 const Login = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -12,31 +15,22 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/login', {
+      const data = await fetchApi('/api/login.json', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ email, password }),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        // 存储用户token
-        localStorage.setItem('token', data.token);
-        navigate('/');
-      } else {
-        const error = await response.json();
-        setError(error.message);
-      }
+      
+      localStorage.setItem('token', data.token);
+      navigate('/');
     } catch (err) {
-      setError('登录失败，请稍后重试');
+      console.log(err);
+      setError(err instanceof Error ? err.message : t('auth.login.failed'));
     }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-6">登录</h2>
+      <h2 className="text-2xl font-bold mb-6">{t('auth.login.title')}</h2>
       {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

@@ -4,10 +4,10 @@ export default {
       title: 'Register',
       email: 'Email',
       password: 'Password',
-      confirmPassword: 'Confirm Password',
+      confirm_password: 'Confirm Password',
       submit: 'Register',
-      passwordMismatch: 'Passwords do not match',
-      registerFailed: 'Registration failed, please try again later'
+      password_mismatch: 'Passwords do not match',
+      register_failed: 'Registration failed, please try again later'
     },
     login: {
       title: 'Login'

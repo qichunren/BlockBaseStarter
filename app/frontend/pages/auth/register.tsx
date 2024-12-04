@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 import { useTranslation } from 'react-i18next';
+import { fetchApi } from '@/utils/api';
 
 const Register = () => {
   const { t } = useTranslation();
@@ -16,30 +17,25 @@ const Register = () => {
     e.preventDefault();
     
     if (password !== passwordConfirmation) {
-      setError(t('auth.register.passwordMismatch'));
+      setError(t('auth.register.password_mismatch'));
       return;
     }
 
     try {
-      const response = await fetch('/api/register', {
+      const data = await fetchApi('/api/register.json', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password, password_confirmation: passwordConfirmation }),
+        body: JSON.stringify({ 
+          email, 
+          password, 
+          password_confirmation: passwordConfirmation 
+        }),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        // 存储用户token
-        localStorage.setItem('token', data.token);
-        navigate('/');
-      } else {
-        const error = await response.json();
-        setError(error.message);
-      }
+      
+      localStorage.setItem('token', data.token);
+      navigate('/');
     } catch (err) {
-      setError(t('auth.register.registerFailed'));
+      console.log(err);
+      setError(err instanceof Error ? err.message : t('auth.register.failed'));
     }
   };
 
@@ -66,7 +62,7 @@ const Register = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">{t('auth.register.confirmPassword')}</label>
+          <label className="block text-gray-700 mb-2">{t('auth.register.confirm_password')}</label>
           <PasswordInput
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}

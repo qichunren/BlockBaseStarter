@@ -1,0 +1,55 @@
+en:
+  api:
+    auth:
+      invalid_credentials: "Invalid email or password"
+      register_failed: "Registration failed, please try again later"
+    
+  auth:
+    login:
+      title: "Login"
+      email: "Email"
+      password: "Password"
+      submit: "Login"
+      failed: "Login failed, please try again later"
+    register:
+      title: "Register"
+      email: "Email"
+      password: "Password"
+      confirm_password: "Confirm Password"
+      submit: "Register"
+      password_mismatch: "Passwords do not match"
+      register_failed: "Registration failed, please try again later"
+  nav:
+    home: "Home"
+    posts: "Posts"
+    login: "Login"
+    register: "Register"
+
+zh:
+  api:
+    auth:
+      invalid_credentials: "邮箱或密码错误"
+      register_failed: "注册失败，请稍后重试"
+    errors:
+      unauthorized: "未授权访问"
+      login_required: "请先登录"
+  auth:
+    login:
+      title: "登录"
+      email: "邮箱"
+      password: "密码"
+      submit: "登录"
+      failed: "登录失败，请稍后重试"
+    register:
+      title: "注册"
+      email: "邮箱"
+      password: "密码"
+      confirm_password: "确认密码"
+      submit: "注册"
+      password_mismatch: "密码不匹配"
+      register_failed: "注册失败，请稍后重试"
+  nav:
+    home: "首页"
+    posts: "文章"
+    login: "登录"
+    register: "注册"
