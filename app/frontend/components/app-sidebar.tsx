@@ -1,4 +1,7 @@
 import * as React from "react"
+import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import { useAuth } from "@/hooks/use-auth"
 
 import { SearchForm } from "@/components/search-form"
 import { VersionSwitcher } from "@/components/version-switcher"
@@ -15,159 +18,88 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-// This is sample data.
 const data = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Building Your Application",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-  ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { t } = useTranslation();
+  const { isAuthenticated, logout } = useAuth();
+
+  const navItems = [
+    {
+      title: t('nav.main'),
+      items: [
+        {
+          title: t('nav.home'),
+          url: '/',
+        },
+        {
+          title: t('nav.posts'),
+          url: '/posts',
+        },
+        {
+          title: 'Pages1',
+          url: '/app/pages1',
+        },
+        {
+          title: 'Pages2',
+          url: '/app/pages2',
+        },
+      ],
+    },
+    {
+      title: t('nav.auth'),
+      items: !isAuthenticated ? [
+        {
+          title: t('nav.login'),
+          url: '/app/login',
+        },
+        {
+          title: t('nav.register'),
+          url: '/app/register',
+        },
+      ] : [
+        {
+          title: t('nav.users'),
+          url: '/app/users',
+        },
+        {
+          title: t('nav.logout'),
+          url: '#',
+          onClick: logout,
+          className: "text-red-500 hover:text-red-700"
+        },
+      ],
+    },
+  ]
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher
+      <VersionSwitcher
           versions={data.versions}
           defaultVersion={data.versions[0]}
         />
         <SearchForm />
       </SidebarHeader>
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+        {navItems.map((group) => (
+          <SidebarGroup key={group.title}>
+            <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
+                {group.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
+                    <SidebarMenuButton 
+                      asChild 
+                      className={item.className}
+                    >
+                      {item.onClick ? (
+                        <button onClick={item.onClick}>{item.title}</button>
+                      ) : (
+                        <Link to={item.url}>{item.title}</Link>
+                      )}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
