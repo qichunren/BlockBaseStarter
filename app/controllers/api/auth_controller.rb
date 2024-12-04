@@ -8,7 +8,7 @@ module Api
         token = generate_token(user.id)
         render json: { token: token }, status: :created
       else
-        render json: { message: user.errors.full_messages.join(', ') }, status: :unprocessable_entity
+        render json: { message: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
       end
     end
 
@@ -20,7 +20,7 @@ module Api
         token = generate_token(user.id)
         render json: { token: token }
       else
-        render json: { message: t('.invalid_credentials') }, status: :unauthorized
+        render json: { message: t(".invalid_credentials") }, status: :unauthorized
       end
     end
 

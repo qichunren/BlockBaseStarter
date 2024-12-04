@@ -10,18 +10,18 @@ module Authentication
   private
 
   def authenticate_user
-    header = request.headers['Authorization']
-    token = header.split(' ').last if header
+    header = request.headers["Authorization"]
+    token = header.split(" ").last if header
 
     begin
       decoded = JWT.decode(token, Rails.application.credentials.secret_key_base)[0]
-      @current_user = User.find(decoded['user_id'])
+      @current_user = User.find(decoded["user_id"])
     rescue JWT::DecodeError, ActiveRecord::RecordNotFound
-      render json: { message: t('.unauthorized') }, status: :unauthorized
+      render json: { message: t(".unauthorized") }, status: :unauthorized
     end
   end
 
   def authenticate_user!
-    render json: { message: t('.login_required') }, status: :unauthorized unless current_user
+    render json: { message: t(".login_required") }, status: :unauthorized unless current_user
   end
 end
