@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -14,7 +16,7 @@ const Register = () => {
     e.preventDefault();
     
     if (password !== passwordConfirmation) {
-      setError('密码不匹配');
+      setError(t('auth.register.passwordMismatch'));
       return;
     }
 
@@ -37,17 +39,17 @@ const Register = () => {
         setError(error.message);
       }
     } catch (err) {
-      setError('注册失败，请稍后重试');
+      setError(t('auth.register.registerFailed'));
     }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-6">注册</h2>
+      <h2 className="text-2xl font-bold mb-6">{t('auth.register.title')}</h2>
       {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700 mb-2">邮箱</label>
+          <label className="block text-gray-700 mb-2">{t('auth.register.email')}</label>
           <Input
             type="email"
             value={email}
@@ -56,7 +58,7 @@ const Register = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">密码</label>
+          <label className="block text-gray-700 mb-2">{t('auth.register.password')}</label>
           <PasswordInput
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -64,7 +66,7 @@ const Register = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 mb-2">确认密码</label>
+          <label className="block text-gray-700 mb-2">{t('auth.register.confirmPassword')}</label>
           <PasswordInput
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
@@ -75,7 +77,7 @@ const Register = () => {
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
         >
-          注册
+          {t('auth.register.submit')}
         </button>
       </form>
     </div>
