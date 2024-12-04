@@ -1,7 +1,8 @@
 module App
   class HomeController < ApplicationController
+    # GET /app
     def index
-      render layout: "react_app"
+      render layout: false
     end
   end
 end
