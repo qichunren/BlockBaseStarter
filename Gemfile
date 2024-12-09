@@ -57,4 +57,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "pagy", "~> 9.3.2"
+gem "pagy", "~> 9.3.3"
