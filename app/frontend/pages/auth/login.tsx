@@ -5,6 +5,7 @@ import { PasswordInput } from '@/components/ui/password-input';
 import { useTranslation } from 'react-i18next';
 import { fetchApi } from '@/utils/api';
 import { useAuth } from '@/hooks/use-auth';
+import { AuthLayout } from '@/components/layouts/auth-layout';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -34,35 +35,41 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-6">{t('auth.login.title')}</h2>
-      {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-gray-700 mb-2">邮箱</label>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 mb-2">密码</label>
-          <PasswordInput
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          登录
-        </button>
-      </form>
-    </div>
+    <AuthLayout>
+      <div>
+        <h2 className="text-2xl font-bold mb-6">{t('auth.login.title')}</h2>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-gray-700 mb-2">{t('auth.login.email')}</label>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-2">{t('auth.login.password')}</label>
+            <PasswordInput
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >
+            {t('auth.login.submit')}
+          </button>
+        </form>
+      </div>
+    </AuthLayout>
   );
 };
 
