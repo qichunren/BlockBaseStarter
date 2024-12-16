@@ -26,4 +26,8 @@ Rails.application.routes.draw do
     post "register", to: "auth#register"
     post "login", to: "auth#login"
   end
+
+  if Rails.env.development?
+    get '/dev/credentials', to: 'dev#credentials'
+  end
 end
