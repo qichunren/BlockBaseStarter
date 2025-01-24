@@ -28,6 +28,6 @@ Rails.application.routes.draw do
   end
 
   if Rails.env.development?
-    get '/dev/credentials', to: 'dev#credentials'
+    get "dev/credentials", to: "dev#credentials"
   end
 end

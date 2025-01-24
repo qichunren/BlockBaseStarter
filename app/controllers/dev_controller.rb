@@ -10,7 +10,7 @@ class DevController < ApplicationController
 
   def ensure_development_environment
     unless Rails.env.development?
-      render json: { error: 'Only available in development environment' }, status: :forbidden
+      render json: { error: "Only available in development environment" }, status: :forbidden
     end
   end
 end
