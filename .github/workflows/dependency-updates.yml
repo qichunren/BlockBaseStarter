@@ -37,6 +37,7 @@ jobs:
       - name: Update Ruby dependencies
         run: |
           bundle install
+          git add Gemfile.lock
           bundle update
           if [[ -n $(git status --porcelain) ]]; then
             git add Gemfile.lock
