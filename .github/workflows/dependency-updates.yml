@@ -1,0 +1,58 @@
+name: Auto Dependency Updates
+
+on:
+  schedule:
+    # 每3天的凌晨 3:00 (UTC) 运行
+    - cron: '0 3 */3 * *'
+  # 允许手动触发工作流
+  workflow_dispatch:
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.4'
+          bundler-cache: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Update Ruby dependencies
+        run: |
+          bundle update
+          if [[ -n $(git status --porcelain) ]]; then
+            git add Gemfile.lock
+            git commit -m "chore(deps): update ruby dependencies"
+          fi
+
+      - name: Update Node.js dependencies
+        run: |
+          pnpm update
+          if [[ -n $(git status --porcelain) ]]; then
+            git add package.json pnpm-lock.yaml
+            git commit -m "chore(deps): update node dependencies"
+          fi
+
+      - name: Push changes
+        run: |
+          if [[ -n $(git log origin/main..HEAD) ]]; then
+            git push origin HEAD:main
+          fi 
