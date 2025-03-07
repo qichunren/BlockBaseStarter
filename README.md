@@ -6,7 +6,7 @@ In this project, you can design pages using the conventional Rails approach with
 
 ## Environment
 
-- Ruby 3.3.4
+- Ruby 3.4.2
 - Rails 8.0 edge
 - Node.js 20.x
 
